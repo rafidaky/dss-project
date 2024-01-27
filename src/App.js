@@ -1,23 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Map from "./components/Map";
+import "./App.css";
+import { Button, TextField } from "@mui/material";
+import { useEffect, useState } from "react";
+import { getElevation } from "./services/getElevation";
 
 function App() {
+  const [coords, setCoords] = useState({ latitude: 0, longitude: 0 });
+
+  const handleLatitudeChange = (e) => {
+    const newLatitude = parseFloat(e.target.value);
+    setCoords((prevCoords) => ({
+      ...prevCoords,
+      latitude: isNaN(newLatitude) ? 0 : newLatitude,
+    }));
+  };
+  const handleLongitudeChange = (e) => {
+    const newLongitude = parseFloat(e.target.value);
+    setCoords((prevCoords) => ({
+      ...prevCoords,
+      longitude: isNaN(newLongitude) ? 0 : newLongitude,
+    }));
+  };
+
+  const onSubmit = async () => {
+    const elevation = await getElevation({ coords });
+    console.log("elevation", elevation);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="textInputWrapper">
+        <TextField
+          onChange={handleLatitudeChange}
+          type="text"
+          label="Latitude"
+          variant="outlined"
+        />
+        <TextField
+          onChange={handleLongitudeChange}
+          label="Longitude"
+          variant="outlined"
+        />
+        <Button
+          onClick={() => {
+            onSubmit();
+          }}
+          variant="contained"
         >
-          Learn React
-        </a>
-      </header>
+          Submit
+        </Button>
+      </div>
+
+      <Map />
     </div>
   );
 }
