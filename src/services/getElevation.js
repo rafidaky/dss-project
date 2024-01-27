@@ -5,7 +5,7 @@ export const getElevation = async ({ coords }) => {
       "Access-Control-Allow-Origin": "*",
     };
 
-    const apiUrl = `https://dss-express-server.vercel.app/getElevation?lat=${coords.latitude}&lon=${coords.longitude}`;
+    const apiUrl = `https://dss-express-server.vercel.app/?lat=${coords.latitude}&lon=${coords.longitude}`;
 
     const response = await fetch(apiUrl, {
       method: "GET",
