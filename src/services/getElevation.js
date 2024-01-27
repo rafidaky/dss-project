@@ -1,12 +1,11 @@
 export const getElevation = async ({ coords }) => {
   try {
-    console.log("coords", coords);
     const headers = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET,POST,PATCH,OPTIONS",
     };
-    const apiUrl = `https://api.opentopodata.org/v1/test-dataset?locations=${coords.latitude},${coords.longitude}`;
+    const apiUrl = `https://your-cors-anywhere-instance.herokuapp.com/https://api.opentopodata.org/v1/test-dataset?locations=${coords.latitude},${coords.longitude}`;
 
     const response = await fetch(apiUrl, {
       method: "GET",
