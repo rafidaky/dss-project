@@ -39,7 +39,7 @@ const Map = ({ setClickedLocation, userPosition }) => {
   };
 
   return (
-    <div className="map_container">
+    <div data-testid="map-container" className="map_container">
       <MapContainer center={position} zoom={13} className="map">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
