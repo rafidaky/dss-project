@@ -18,24 +18,35 @@ function App() {
   const showError = () => toast("Something went wrong, please try again.");
 
   const handleLatitudeChange = (e) => {
-    const newLatitude = e.target.value;
-    if (/^[0-9.]*$/.test(newLatitude)) {
-      setCoords((prevCoords) => ({
-        ...prevCoords,
-        lat: newLatitude,
-      }));
+    let newLatitude = e.target.value;
+    newLatitude = newLatitude.replace(/[^0-9.]/g, "");
+    const dotIndex = newLatitude.indexOf(".");
+    if (dotIndex !== -1) {
+      newLatitude =
+        newLatitude.slice(0, dotIndex + 1) +
+        newLatitude.slice(dotIndex + 1).replace(".", "");
     }
+
+    setCoords((prevCoords) => ({
+      ...prevCoords,
+      lat: newLatitude,
+    }));
   };
 
   const handleLongitudeChange = (e) => {
-    const newLongitude = e.target.value;
-
-    if (/^[0-9.]*$/.test(newLongitude)) {
-      setCoords((prevCoords) => ({
-        ...prevCoords,
-        lng: newLongitude,
-      }));
+    let newLongitude = e.target.value;
+    newLongitude = newLongitude.replace(/[^0-9.]/g, "");
+    const dotIndex = newLongitude.indexOf(".");
+    if (dotIndex !== -1) {
+      newLongitude =
+        newLongitude.slice(0, dotIndex + 1) +
+        newLongitude.slice(dotIndex + 1).replace(".", "");
     }
+
+    setCoords((prevCoords) => ({
+      ...prevCoords,
+      lng: newLongitude,
+    }));
   };
 
   const onSubmit = async (location) => {
