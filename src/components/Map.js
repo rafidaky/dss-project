@@ -1,10 +1,20 @@
 // Map.js
-import React from "react";
-import { MapContainer, TileLayer, useMapEvents } from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMapEvents,
+  useMap,
+} from "react-leaflet";
 import "./Map.css";
 
-const Map = ({ setClickedLocation }) => {
-  const position = [48.2082, 16.3719];
+const Map = ({ setClickedLocation, userPosition }) => {
+  const [position, setPosition] = useState([48.2082, 16.3719]);
+
+  useEffect(() => {
+    setPosition(userPosition);
+  }, [userPosition]);
 
   function LocationMarker() {
     const map = useMapEvents({
@@ -13,7 +23,21 @@ const Map = ({ setClickedLocation }) => {
         setClickedLocation({ lat, lng });
       },
     });
+
+    useEffect(() => {
+      setPosition(userPosition);
+    }, [userPosition]);
+
+    return null;
   }
+  const RecenterAutomatically = ({ position }) => {
+    const map = useMap();
+    useEffect(() => {
+      map.setView([position[0], position[1]]);
+    }, [position]);
+    return null;
+  };
+
   return (
     <div className="map_container">
       <MapContainer center={position} zoom={13} className="map">
@@ -22,6 +46,8 @@ const Map = ({ setClickedLocation }) => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <LocationMarker />
+        <RecenterAutomatically position={position} />
+        <Marker position={position} />
       </MapContainer>
     </div>
   );

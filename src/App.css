@@ -9,56 +9,59 @@ html {
 }
 
 .App {
-  align-items: center;
   display: flex;
   height: 100%;
   width: 100%;
   flex-direction: column;
-  justify-content: center;
 }
-.textInputWrapper {
+
+.element-wrapper {
+  display: grid;
+  grid-template-columns: 100%;
+  width: 80%;
+  margin: auto;
+  padding: 10px;
+  gap: 5px;
+}
+
+.elevation-wrapper {
   display: flex;
-  margin-bottom: 3.5%;
-  margin-top: 3.5%;
-  justify-content: space-evenly;
   align-items: center;
-  width: 100%;
+  border: 1px solid gray;
+  padding: 0px 12px;
+  height: 3.4rem;
+  border-radius: 4px;
+  overflow: auto;
 }
-.input {
-  width: 15%;
+
+.elevation-wrapper h6 {
+  font-size: 1rem;
 }
+
 .button {
-  width: 15%;
+  height: 3.4rem;
 }
-.elevation_container {
-}
-/* Extra small devices (phones) */
-@media (max-width: 576px) {
-  .textInputWrapper {
-    flex-direction: column;
+
+@media (min-width: 769px) {
+  .element-wrapper {
+    grid-template-columns: 50% 50%;
+    padding: 20px;
+    gap: 10px;
   }
-  .input {
-    margin-top: 20%;
+}
+
+@media (min-width: 993px) {
+  .element-wrapper {
+    grid-template-columns: 25% 25% 25% 25%;
+    padding: 25px;
+    gap: 15px;
   }
-  /* Styles for extra small devices */
 }
 
-/* Small devices (tablets) */
-@media (min-width: 577px) and (max-width: 768px) {
-  /* Styles for small devices */
-}
-
-/* Medium devices (desktops and laptops) */
-@media (min-width: 769px) and (max-width: 992px) {
-  /* Styles for medium devices */
-}
-
-/* Large devices (large desktops and high-resolution screens) */
-@media (min-width: 993px) and (max-width: 1200px) {
-  /* Styles for large devices */
-}
-
-/* Extra large devices (extra-large desktops and high-resolution screens) */
 @media (min-width: 1201px) {
-  /* Styles for extra large devices */
+  .element-wrapper {
+    padding: 30px;
+    gap: 20px;
+  }
+
 }
